@@ -382,13 +382,17 @@ int LedVibratorDevice::on(int32_t timeoutMs) {
         return ret;
     } else if (timeoutMs <= 20) {
         ret |= write_value(LED_DEVICE "/vmax", timeoutMs * 10);
+
     }
     else if (timeoutMs > 450) {
         ret |= write_value(LED_DEVICE "/vmax", 3600);
+        ret |= write_value(LED_DEVICE "/waveform_index", 6);
+
     } else {
-        ret |= write_value(LED_DEVICE "/vmax", 2500);
+        ret |= write_value(LED_DEVICE "/vmax", 3900);
+        ret |= write_value(LED_DEVICE "/waveform_index", 6);
     }
-    ret |= write_value(LED_DEVICE "/waveform_index", 7);
+    ret |= write_value(LED_DEVICE "/waveform_index", 6);
     ret |= write_value(LED_DEVICE "/duration", timeoutMs);
     ret |= write_value(LED_DEVICE "/state", "1");
     ret |= write_value(LED_DEVICE "/activate", "1");
